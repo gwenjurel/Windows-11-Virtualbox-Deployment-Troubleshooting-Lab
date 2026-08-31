@@ -51,6 +51,35 @@ The VM was configured with:
 
 The virtual hard disk was initially empty because Windows had not yet been installed.
 
+# 3. Initial Boot Failure
+When I first attempted to start the VM, Virtual Box aborted the virtual machine.
+The error indicated that hardware virtualization was unavailable.
+The relevant condition was:
+'AMD-V disabled/unavailable'
+This indicated that the host system's AMD hardware virtualization feature was disabled.
+
+# 4. Troubleshooting Hardware Virtualization
+I checked Windows Task Manager:
+'Task Manager -> Performance -> CPU'
+The system reported: 
+'Virtualization Disabled'
+Because the host system uses an AMD Ryzen Processor, I entered the motherboard UEFI/BIOS settings and located the AMD Virtualization setting.
+The setting was:
+'SVM Mode'
+SVM Mode was changed from:
+Disable --> Enable'
+The BIOS configuration was then saved and the computer restarted.
+After returning to windows, Task Manager was checked again.
+The system then reported:
+'Virtualization: Enabled'
+This resolved the initial VirtualBox Hardware virtualization problem.
+
+# 5 Troubleshooting the Windows ISO Boot
+After hardware virtualization was enabled, the VM started successfully but initially entered the UEFI Boot Manager instead of starting Windows Setup.
+The UEFI Boot Manager displayed the virtual CD/DVD device.
+
+
+
 
 
 
